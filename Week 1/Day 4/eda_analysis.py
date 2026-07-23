@@ -5,59 +5,68 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def practice():
-    # Sample dataset
-    data = {
-        "Age": [21, 25, 30, 35, 40, 45],
-        "Salary": [25000, 35000, 50000, 60000, 75000, 90000],
-        "Department": ["IT", "HR", "IT", "Finance", "IT", "HR"]
-    }
+# Create dataset
+data = {
+    "Age": [21, 25, 30, 35, 40, 45],
+    "Salary": [25000, 35000, 50000, 60000, 75000, 90000],
+    "Department": ["IT", "HR", "IT", "Finance", "IT", "HR"]
+}
 
-    # Load dataset
-    df = pd.DataFrame(data)
-
-    print("Dataset Information:")
-    df.info()
-
-    print("\nStatistical Description:")
-    print(df.describe())
-
-    print("\nMissing Values:")
-    print(df.isnull().sum())
-
-    # Observations
-    print("\nEDA Observations:")
-    print("""
-    1. Dataset contains employee age, salary and department details.
-    2. Salary increases with employee age in this sample.
-    3. IT department has the highest number of records.
-    4. No missing values are present.
-    5. Salary distribution contains a wide range of values.
-    """)
-
-    # Numeric column distributions
-    df.hist(figsize=(8,4))
-    plt.show()
-
-    # Correlation heatmap
-    correlation = df.select_dtypes(
-        include="number"
-    ).corr()
-
-    sns.heatmap(correlation, annot=True)
-    plt.title("Correlation Heatmap")
-    plt.show()
-
-    # Top category counts
-    df["Department"].value_counts().head(10).plot(
-        kind="bar",
-        title="Top Department Counts"
-    )
-    plt.show()
-
-    return df
+# Convert data into DataFrame
+df = pd.DataFrame(data)
 
 
-practice()
+# 1. Dataset information
+print("Dataset Information:")
+df.info()
+
+
+# 2. Statistical summary
+print("\nDescription:")
+print(df.describe())
+
+
+# 3. Missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+
+# 4. Distribution of numeric columns
+df.hist(figsize=(8, 4))
+plt.tight_layout()
+plt.savefig("distribution_plot.png")
+plt.show()
+
+
+# 5. Correlation heatmap
+correlation = df.select_dtypes(include="number").corr()
+
+sns.heatmap(correlation, annot=True)
+plt.title("Correlation Heatmap")
+plt.savefig("correlation_heatmap.png")
+plt.show()
+
+
+# 6. Top category counts
+df["Department"].value_counts().head(10).plot(
+    kind="bar",
+    title="Top Department Counts"
+)
+
+plt.tight_layout()
+plt.savefig("top_category_counts.png")
+plt.show()
+
+
+# 7. Observations
+print("""
+EDA Observations:
+1. Dataset contains age, salary, and department information.
+2. Salary values show variation across employees.
+3. IT department has the highest number of records.
+4. No missing values are present in the dataset.
+5. Correlation analysis helps understand relationships between numerical columns.
+""")
+
 
 print("Done! Review with CIA for feedback.")
