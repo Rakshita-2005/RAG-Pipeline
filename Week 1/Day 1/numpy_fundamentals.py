@@ -1,3 +1,4 @@
+# Week 1 Day 1 - NumPy Fundamentals
 import numpy as np
 import pandas as pd
 
